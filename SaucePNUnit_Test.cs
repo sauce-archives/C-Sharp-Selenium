@@ -7,7 +7,7 @@ using System.Net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
- 
+
 namespace Saucey_Selenium {
     [TestFixture("chrome", "45", "Windows 7", "", "")]
     public class SauceNUnit_Test
@@ -18,7 +18,7 @@ namespace Saucey_Selenium {
         private String os;
         private String deviceName;
         private String deviceOrientation;
- 
+
         public SauceNUnit_Test(String browser, String version, String os, String deviceName, String deviceOrientation)
         {
             this.browser = browser;
@@ -27,7 +27,7 @@ namespace Saucey_Selenium {
             this.deviceName = deviceName;
             this.deviceOrientation = deviceOrientation;
         }
- 
+
         [SetUp]
         public void Init()
         {
@@ -37,14 +37,14 @@ namespace Saucey_Selenium {
             caps.SetCapability(CapabilityType.Platform, os);
             caps.SetCapability("deviceName", deviceName);
             caps.SetCapability("deviceOrientation", deviceOrientation);
-            caps.SetCapability("username", Constants.SAUCE_LABS_ACCOUNT_NAME);
-            caps.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);
+            caps.SetCapability("username", "SAUCE_USERNAME");
+            caps.SetCapability("accessKey", "SAUCE_ACCESS_KEY");
             caps.SetCapability("name", TestContext.CurrentContext.Test.Name);
- 
+
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), caps, TimeSpan.FromSeconds(600))
- 
+
         }
- 
+
         [Test]
         public void googleTest()
         {
@@ -54,7 +54,7 @@ namespace Saucey_Selenium {
             query.SendKeys("Sauce Labs");
             query.Submit();
         }
- 
+
         [TearDown]
         public void CleanUp()
         {
