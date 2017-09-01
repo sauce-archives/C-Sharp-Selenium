@@ -58,7 +58,7 @@ namespace Saucey_Selenium {
         [TearDown]
         public void CleanUp()
         {
-            bool passed = TestContext.CurrentContext.Result.Status == TestStatus.Passed;
+            bool passed = TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Passed;
             try
             {
                 // Logs the result to Sauce Labs
