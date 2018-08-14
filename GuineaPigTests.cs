@@ -42,7 +42,8 @@ namespace SeleniumNunit
         {
             var passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
             ((IJavaScriptExecutor)Driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-            Driver.Quit();
+            if(Driver != null)
+                Driver.Quit();
         }
     }
 }
