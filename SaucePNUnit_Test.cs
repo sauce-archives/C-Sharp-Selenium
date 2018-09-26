@@ -58,17 +58,9 @@ namespace Saucey_Selenium {
         [TearDown]
         public void CleanUp()
         {
-            bool passed = TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Passed;
-            try
-            {
-                // Logs the result to Sauce Labs
-                ((IJavaScriptExecutor)driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-            }
-            finally
-            {
-                // Terminates the remote webdriver session
-                driver.Quit();
-            }
+            var passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
+            ((IJavaScriptExecutor)Driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+            Driver?.Quit();
         }
     }
 }
